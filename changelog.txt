@@ -1,0 +1,70 @@
+DBCalc - Functional Dependency Calculator for GajdOS
+-----------------
+v0.4 Update (Minimal cover) - 2017.04.24.
+Added Min.cover functionality! Works for the current FD's in the set.
+Min.cover does not pursue to have the least number of FD's in the result.
+= Model:
+  - Added minCover() function to calculate minimal cover of a FuncDepSet.
+  - Added shrink() function to omit a particular dependency (useful at minCover function).
+  - Added removeEmpty() function to remove FD's with empty members. 
+= View:
+  - Added button to calculate min. cover. Result appears in the respective textbox.
+  - Removed The-One-Whom-We-Not-Name from the top title.
+-----------------
+v0.311 Hotfix - 2017.04.20.
+= View:
+  - Fixed FD input accepting trivial dependencies.
+-----------------
+v0.31 Update - 2017.04.20.
+= Model:
+  - New FDPanel class introduced to handle different FDSets. 
+= View:
+  - Added second FDSet container. Each container has their respective buttons.
+  - Attribute set and FD can now be added from the same panel.
+-----------------
+v0.301z Change - 2017.04.18.
+= View:
+  - Added button to remove all FD's in set.
+-----------------
+v0.3 Update (Closure) - 2017.04.18.
+Added Closure functionality! Works for custom attribute sets.
+Make sure to add FD's before using :)
+= Model:
+  - Added closure() function to compute an attribute set's closure set.
+  - Added simplify() function to remove duplicate letters and order them in ascending order.
+= View:
+  - Added input functionality for closures.
+-----------------
+v0.23 Update - 2017.04.14.
+= Model:
+  - Relation, Database and TableColumn classes removed.
+  - Duplicate funcdeps are no longer accounted for. 
+-----------------
+v0.22 Update - 2017.04.14.
+= Model:
+  - FuncDep and FuncDepSet now work with uppercase attributes.
+  - Attribute class no longer has a field "isKey". 
+-----------------
+v0.211 Hotfix - 2017.04.09.
+= Model:
+  - Fixed removeFuncDep() not removing the last entry for repeating FD's.
+-----------------
+v0.21 Update - 2017.04.09.
+= View:
+  - Added a few labels for navigation.
+  - Moved buttons slightly under FD textbox.
+-----------------
+v0.201 Hotfix - 2017.04.08.
+= Model:
+  - Replaced StringBuilder in function signatures with String where applicable.
+= View:
+  - Remove FD button now works properly.
+-----------------
+v0.2 Update - 2017.04.07.
+= Model:
+  - Added FD remove routine. Supports a multitude of inputs.
+= View:
+  - Added remove button functionality.
+-----------------
+v0.1 Initial - 2017.04.06.
+- Base model done with dysfunctional view.
