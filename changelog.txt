@@ -2,6 +2,8 @@ DBCalc - Functional Dependency Calculator
 -----------------
 v0.41g Change - 2017.04.29.
 = Model:
+  - FuncDepSet is now known as Database. Contains new field for own attributes.
+    * Relation field is highly dysfunctional as of this version.
   - New Helper static class: contains non-entity related functions.
     As a result, some signatures have been changed and the length of Database
     has been greatly reduced.
