@@ -1,4 +1,12 @@
-DBCalc - Functional Dependency Calculator for GajdOS
+DBCalc - Functional Dependency Calculator
+-----------------
+v0.41g Change - 2017.04.29.
+= Model:
+  - New Helper static class: contains non-entity related functions.
+    As a result, some signatures have been changed and the length of Database
+    has been greatly reduced.
+    Coincidence: Helper itself is barely referenced from outside calls.
+  - Slight optimization of listener functions.  
 -----------------
 v0.4 Update (Minimal cover) - 2017.04.24.
 Added Min.cover functionality! Works for the current FD's in the set.

@@ -5,8 +5,8 @@ package dbCalc;
 public class Main {
 	
 	public static void main(String[] args) throws Exception {
-		FuncDepSet f = new FuncDepSet();
-		FuncDepSet g = new FuncDepSet();
+		Database f = new Database();
+		Database g = new Database();
 		Window w = new Window(f, g);
 	}
 	

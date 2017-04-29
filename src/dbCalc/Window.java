@@ -24,12 +24,12 @@ public class Window extends JFrame {
 	JTextField master, slave, attrs;
 	JLabel textArrow, textFD, textAction, textClosure;
 	JButton btnAdd, btnDelete, btnClosure, btnDeleteAll;
-	FuncDepSet f, g;
-	final float versionNumber = 0.4f;
-	final String title = "dbCalc - Functional Dependency Calculator v" + versionNumber;
+	Database f, g;
+	final double versionNumber = 0.41;
+	final String title = "dbCalc - Functional Dependency Calculator v" + versionNumber + "g";
 	
 	
-	public Window(FuncDepSet f, FuncDepSet g) {
+	public Window(Database f, Database g) {
 		this.f = f;
 		this.g = g;
 		//--- instantiate panels
@@ -94,10 +94,10 @@ public class Window extends JFrame {
 		JTextArea textArea;
 		JScrollPane textPane;
 		JButton btnAdd, btnDelete, btnClosure, btnDeleteAll, btnMinCover;
-		FuncDepSet set;
+		Database set;
 		JLabel textAction;
 		
-		public FDPanel (FuncDepSet f, int x, int y) {
+		public FDPanel (Database f, int x, int y) {
 			this.set = f;
 			this.setLayout(null);
 			this.setBounds(x, y, 320, 240);
@@ -197,7 +197,7 @@ public class Window extends JFrame {
 				}
 				if (arg0.getButton() == MouseEvent.BUTTON3) {
 					for (int i = 0; i < 10; i++) {	
-						textArea.append("ZERG RUSH zZzZzZzZzZzZ\n");
+						textArea.append("Created for GajdOS (C)\n");
 					}
 				}
 			}
@@ -224,14 +224,13 @@ public class Window extends JFrame {
 					//&& (!at.isEmpty())
 					) {
 					textArea.setText("");
-					String closure = set.closure(at);
-					set.writeSet();
 					ArrayList<FuncDep> fdset = set.getSet();
 					for (FuncDep item : fdset) {
 						String textToAppend = item.stringify();
 						textArea.append(textToAppend + "\n");
 					}
-					textArea.append("Closure:\n");
+					String closure = Helper.closure(fdset, at);
+					textArea.append("---\nClosure:\n");
 					textArea.append(closure + "\n");
 					//szovegdoboz.repaint();
 				}
@@ -285,7 +284,7 @@ public class Window extends JFrame {
 					textArea.append(item.stringify() + "\n");
 				}
 				textArea.append("---\nMinimal cover:\n");
-				fdset = set.minCover();
+				fdset = Helper.minCover(fdset);
 				for (FuncDep item : fdset) {
 					textArea.append(item.stringify() + "\n");
 				}
