@@ -2,6 +2,7 @@ package dbCalc;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import dbCalc.Content.State;
 
 public class Helper {
 	
@@ -286,6 +287,57 @@ public class Helper {
 			}
 		}
 		return f.getSet();
+	}
+	
+	//finds all attributes in a funcdepset
+	public static String getAttributes(ArrayList<FuncDep> f) {
+		StringBuilder result = new StringBuilder("");
+		for (FuncDep fd : f) {
+			result.append(fd.getMasterName() + fd.getSlaveName());
+		}
+		return simplify(result.toString());
+	}
+	
+	public static String removeString(String container, String query) {
+		StringBuilder cont = new StringBuilder(container);
+		ArrayList<Integer> deleteable = new ArrayList<>(0); 
+		for (int i = 0; i < cont.toString().length(); i++) {
+			boolean contains = false;
+			for (int j = 0; j < query.length(); j++) {
+				if ((cont.charAt(i) == query.charAt(j)) && (!contains)) {
+					deleteable.add(i);
+					contains = true;
+				}
+			}
+		}
+		Collections.sort(deleteable, Collections.reverseOrder());
+		for (int index : deleteable)
+			cont.deleteCharAt(index);
+		return cont.toString();
+	}
+	
+	//creates a particular side of attributes in funcdepset
+	public static String createSide(ArrayList<FuncDep> f, String attrs, State s) {
+		String existing = getAttributes(f);
+		if (s == State.NONE) {
+			existing = removeString(attrs, existing);
+			return existing;
+		}
+		else {
+			String left = "";
+			String right = "";
+			for (FuncDep fd : f) {
+				left = left + fd.getMasterName();
+				right = right + fd.getSlaveName();
+			}
+			left = simplify(left);
+			right = simplify(right);
+			if (s == State.LEFT)
+				return removeString(left, right);
+			else if (s == State.RIGHT)
+				return removeString(right, left);
+		}
+		return "Something went wrong in Helper.createSide().";
 	}
 
 }

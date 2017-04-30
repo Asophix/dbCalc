@@ -3,31 +3,38 @@ package dbCalc;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * An Object class that resembles a database. It contains two fields:
+ *  - a set of attributes, known as a "relation"  
+ *  - a set of functional dependencies between the relation's attributes.
+ */
+
 public class Database {
 
-	private ArrayList<Attribute> relation;
+	//TODO Relation
+	//Object négytagú deklarációval. Bal, mindegyik, jobb, egyik sem.
+	//Amikor a függés frissül, akkor a relation is fog DataBase-ben. 
+	//ArrayList<Attribute> ki lesz vezérelve Relation fieldjeibe.
+	//Alapesetben mindenki mindkettőbe kerül.
+	//Inkrementális implementáció:
+	//f1: ui-n táblázat - BMEJ => done
+	//f2: Helper - kulcs keresése
+	//f3: Helper - normálformák!!!
+	
 	private ArrayList<FuncDep> set;
 	
 	//simple constructor
 	public Database() {
-		this.relation = new ArrayList<>(0);
 		this.set = new ArrayList<>(0);
 	}
 	
 	//parameterized constructors
 	public Database(Database f) {
-		this.relation = new ArrayList<>(f.getRelation());
 		this.set = new ArrayList<>(f.getSet());
 	}
 	
-	public Database(ArrayList<Attribute> relation, ArrayList<FuncDep> set) {
-		this.relation = relation;
+	public Database(ArrayList<FuncDep> set) {
 		this.set = set;
-	}
-	
-	//getter functions
-	public ArrayList<Attribute> getRelation() {
-		return this.relation;
 	}
 	
 	//getter for a specific FuncDep index

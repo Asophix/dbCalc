@@ -1,5 +1,21 @@
 DBCalc - Functional Dependency Calculator
 -----------------
+v0.5 Update (Attribute evaluation) - 2017.04.30.
+Added Attribute evaluation functionality! A small table indicates in the bottom
+left corner about each attribute's primary or secondary state.
+= Model:
+  - New Content class: supports evaluation functionality with a simple enum.
+  - Relation field from Database removed.
+  - Helper:
+    * Added createSide() function to get attributes of a particular side from FDSet.
+    * Added removeString() function to remove letters from a string (mainly to remove
+      attributes from an existing set).
+= View:
+  - Added attribute evaluation table to the bottom left corner.
+  - Added button for attribute evaluation, for both containers.
+  - Status bar added on the bottom to make general use easier.
+  - Several labels have been updated.
+-----------------
 v0.41g Change - 2017.04.29.
 = Model:
   - FuncDepSet is now known as Database. Contains new field for own attributes.

@@ -9,7 +9,5 @@ public class Main {
 		Database g = new Database();
 		Window w = new Window(f, g);
 	}
-	
-	
 
 }

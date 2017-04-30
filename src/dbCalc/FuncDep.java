@@ -2,7 +2,7 @@ package dbCalc;
 
 import java.util.ArrayList;
 
-public class FuncDep{
+public class FuncDep {
 	
 	private ArrayList<Attribute> master; //left-side of FuncDep
 	private Attribute slave;  //right-side of FuncDep
@@ -36,7 +36,6 @@ public class FuncDep{
 	public FuncDep(FuncDep funcDep) {
 		this.master = new ArrayList<Attribute>(funcDep.getMaster());
 		this.slave = new Attribute(funcDep.getSlave());
-		// TODO Auto-generated constructor stub
 	}
 
 	//removes an array of attributes from the left side 
