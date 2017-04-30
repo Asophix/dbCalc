@@ -27,3 +27,5 @@ The current version supports:
 </ul>
 
 Dóka Zsolt (C) 2017
+
+<hr>
