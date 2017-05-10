@@ -1,15 +1,14 @@
-<h1>dbCalc></h1>
+<img src="logo.png" alt="dbCalc">
 <p><b>dbCalc</b> is a simple application written in Java. It is a functional dependency calculator created as to practise Database Theory: Schema Decomposition. This project is currently undergoing development.<br>
-Current version: 0.5</p>
+Current version: 0.55</p>
 
 <h2>Overview</h2>
-<p>dbCalc features a basic user interface, where functional dependencies can be added for up to 2 panels (representing FD sets). Each panel can handle its own content, as well as calculate minimal cover sets and closures for each FD sets. The results appear in the respective text area, under the current FD set.</p>
-<p>The class diagram and its internal functions are viewable in the ModelGoon plugin, in Eclipse.</p>
+<p>dbCalc features a basic user interface, where functional dependencies can be added to a panel (representing FD sets). The utility can handle FD operations, as well as calculate minimal cover sets and closures for the FD set. The results appear in the respective text area or on the right hand side table.</p>
 
 <h2>Functionality</h2>
 The current version supports:
 <ul>
-<li>Storage of functional dependencies in up to two sets.
+<li>Storage of functional dependencies.
 <li>Calculation for an FD set's minimal cover.
 <li>Calculation for an attribute set's closure.
 <li>Evaluation for a given schema on a FD set's attributes.

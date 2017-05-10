@@ -1,5 +1,23 @@
 DBCalc - Functional Dependency Calculator
 -----------------
+v0.55 Update - 2017.05.10.
+Redesigned User Interface. There is room for future features, but overall layout looks
+more polished. Most of the view code has been rewritten from scratch. 
+= Model:
+  - Helper:
+    * Fixed minCover() not removing empty dependencies after last step.
+  - Window:
+    * Moved all subpanels and listeners into their respective classes.
+    * Subpanels are static for easy availability in cross-references.
+    * As a result, the code in Window has been greatly reduced.
+= View:
+  - Added a placeholder MenuBar to the top of the window.
+  - Moved status bar to the top from the bottom.
+  - Moved most panels to the middle.
+  - Reduced number of FD sets to one.
+  - Most action buttons got moved to the input panel.
+  - Introduced new logo. :) 
+-----------------
 v0.5 Update (Attribute evaluation) - 2017.04.30.
 Added Attribute evaluation functionality! A small table indicates in the bottom
 left corner about each attribute's primary or secondary state.
