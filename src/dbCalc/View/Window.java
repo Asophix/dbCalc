@@ -11,7 +11,7 @@ import dbCalc.Model.Database;
 public class Window extends JFrame {
 
 	private static final long serialVersionUID = 1485565230491815565L;
-	final double versionNumber = 0.55;
+	final double versionNumber = 0.6;
 	final String title = "dbCalc - Functional Dependency Calculator v" + versionNumber;
 	public static InputPanel iPanel; //generic input container
 	public static FDPanel fdPanel; //FD-container
@@ -31,7 +31,6 @@ public class Window extends JFrame {
 		Window.f = f;
 		//--- set window-specific attributes 
 		this.setLayout(null);
-		this.setVisible(true);
 		this.setTitle(title);
 		this.setResizable(false);
 		this.setPreferredSize(new Dimension(640, 480));
@@ -66,6 +65,7 @@ public class Window extends JFrame {
 		logoPanel.setBounds(490, 376, 150, 104);
 		bigPanel.add(logoPanel);
 		//---
+		this.setVisible(true);
 		this.pack();
 	}
 	

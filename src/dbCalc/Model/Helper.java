@@ -2,6 +2,7 @@ package dbCalc.Model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 
 import dbCalc.Model.Content.State;
 
@@ -339,6 +340,41 @@ public class Helper {
 				return removeString(right, left);
 		}
 		return "Something went wrong in Helper.createSide().";
+	}
+	
+	//finds keys in a given funcdepset, after evaluating attributes
+	public static ArrayList<String> findKeys(ArrayList<FuncDep> set, String left, String both, String none) {
+		String existing = getAttributes(set);
+		ArrayList<String> subsets = formAll(both);
+		ArrayList<String> result = new ArrayList<>(0);
+		if (!subsets.isEmpty()) {
+			for (String subset : subsets) {
+				subset = simplify(left + subset);
+				if (closure(set, subset).equals(existing)) {
+					subset = subset + none;			
+					result.add(subset);
+				}	
+			}
+		}
+		else {
+			result.add(left + none);
+		}
+		HashSet<Integer> deleteable = new HashSet<>(0);
+		for (int i = 0; i < result.size(); i++) {
+			for (int j = 0; j < result.size(); j++) {
+				if ((i != j) && (Helper.contains(result.get(i), result.get(j)))) {
+					deleteable.add(i);
+				}
+			}
+		}
+		ArrayList<Integer> indices = new ArrayList<>(0);
+		indices.addAll(deleteable);
+		
+		Collections.sort(indices, Collections.reverseOrder());
+		for (int index : indices)
+			result.remove(index);
+		Collections.sort(result);
+		return result;
 	}
 
 }

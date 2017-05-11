@@ -1,9 +1,9 @@
 <img src="logo.png" alt="dbCalc">
 <p><b>dbCalc</b> is a simple application written in Java. It is a functional dependency calculator created as to practise Database Theory: Schema Decomposition. This project is currently undergoing development.<br>
-Current version: 0.55</p>
+Current version: 0.6</p>
 
 <h2>Overview</h2>
-<p>dbCalc features a basic user interface, where functional dependencies can be added to a panel (representing FD sets). The utility can handle FD operations, as well as calculate minimal cover sets and closures for the FD set. The results appear in the respective text area or on the right hand side table.</p>
+<p>dbCalc features a basic user interface, where functional dependencies can be added to a panel (representing FD sets). The utility can handle FD operations and evaluate attributes. The results appear in the respective text area or on the right hand side table.</p>
 
 <h2>Background</h2>
 <p>Functional dependencies (FD) are connections between a table's columns, where a certain column determines and therefore implies the other's values. While handy and most of the time essential, too many FD's can lead to repeating data values. Eliminating and simplifying FD's, so that they adhere to a series of conditions, (called normal forms) can reduce such redundancy.
@@ -17,6 +17,7 @@ The current version supports:
 <li>Calculation for an FD set's minimal cover.
 <li>Calculation for an attribute set's closure.
 <li>Evaluation for a given schema on a FD set's attributes.
+<li>Finding keys in an FD set.
 </ul>
 
 <h2>Motivation and Terms of Use</h2>
@@ -60,7 +61,6 @@ The current version supports:
 <h2>To be added...</h2>
 <ul>
 <li>Proper .pdf documentation for the utility.
-<li>Key search.
 <li>Normal form evaluation.
 <li>And many more... 
 </ul>

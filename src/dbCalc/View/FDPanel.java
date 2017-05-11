@@ -50,6 +50,7 @@ public class FDPanel extends JPanel {
 				Window.f.removeAll();
 				Window.statusPanel.status.setText("Cleared dependency set.");
 				Window.fdPanel.textArea.setText("");
+				Window.iPanel.attrs.setText("");
 			}
 		}
 

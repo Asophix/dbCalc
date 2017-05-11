@@ -1,5 +1,18 @@
 DBCalc - Functional Dependency Calculator
 -----------------
+v0.6 Update (Key Search) - 2017.05.11.
+Added Key Search functionality! The keys are listed on the right-hand side,
+below the evaluation table. Evaluate commences both key search and attribute
+sort. 
+= Model:
+  - Main has been moved to View package.
+  - Helper:
+    * Added findKeys() to find keys in a certain FD set.
+= View:
+  - Evaluate got its own text fields to retrieve separate input.
+  - New key lister under attribute evaluation (LRBN) table.
+  - Fixed a number of status bar typos and value references.
+-----------------
 v0.55 Update - 2017.05.10.
 Redesigned User Interface. There is room for future features, but overall layout looks
 more polished. Most of the view code has been rewritten from scratch. 

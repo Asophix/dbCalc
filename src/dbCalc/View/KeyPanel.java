@@ -5,6 +5,8 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class KeyPanel extends JPanel {
@@ -15,9 +17,9 @@ public class KeyPanel extends JPanel {
 	private static final long serialVersionUID = 3653157922140956328L;
 	JLabel textAttrs, textLeft, textRight, textBoth, textNone;
 	JTextField left, right, both, none;
-	//JLabel textKeys;
-	//JTextArea textArea;
-	//JScrollPane scrollArea;
+	JLabel textKeys;
+	JTextArea textArea;
+	JScrollPane scrollArea;
 	
 	public KeyPanel() {
 		this.setLayout(null);
@@ -62,7 +64,18 @@ public class KeyPanel extends JPanel {
 		none.setBounds(120, 82, 116, 20);
 		none.setEnabled(false);
 		this.add(none);
-		
+		//--- Key lister components
+		textKeys = new JLabel("<html><u>Keys:</u></html>");
+		textKeys.setBounds(2, 102, 116, 20);
+		this.add(textKeys);
+		//---
+		textArea = new JTextArea("");
+		textArea.setBounds(2, 122, 236, 116);
+		this.add(textArea);
+		//---
+		scrollArea = new JScrollPane(textArea);
+		scrollArea.setBounds(2, 122, 236, 116);
+		this.add(scrollArea);
 	}
 
 }

@@ -1,6 +1,6 @@
-package dbCalc.Model;
+package dbCalc.View;
 
-import dbCalc.View.Window;
+import dbCalc.Model.Database;
 
 //import java.util.ArrayList;
 

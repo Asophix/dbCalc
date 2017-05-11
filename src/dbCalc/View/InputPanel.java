@@ -21,8 +21,8 @@ public class InputPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -2800783750060069235L;
-	JTextField master, slave, attrs;
-	JLabel textFD, textArrow, textAction, textRelation, textTitle;
+	JTextField master, slave, closure, attrs, extra;
+	JLabel textFD, textArrow, textAction, textClosure, textTitle, textEvaluate;
 
 	JButton btnAdd, btnDelete, btnClosure, btnMinCover, btnKey;
 	
@@ -34,8 +34,8 @@ public class InputPanel extends JPanel {
 		textTitle.setBounds(50, 0, 60, 20);
 		this.add(textTitle);
 		//--- FD input
-		textFD = new JLabel("Functional dependency");
-		textFD.setBounds(15, 20, 130, 20);
+		textFD = new JLabel("Functional dependency:");
+		textFD.setBounds(2, 20, 160, 20);
 		this.add(textFD);
 		//---
 		master = new JTextField();
@@ -60,28 +60,41 @@ public class InputPanel extends JPanel {
 		btnDelete.addMouseListener(new DeleteListener());
 		this.add(btnDelete);
 		//--- relation input
-		textRelation = new JLabel("Relation (attribute set)");
-		textRelation.setBounds(15, 80, 130, 20);
-		this.add(textRelation);
+		textClosure = new JLabel("Relation to close:");
+		textClosure.setBounds(2, 80, 130, 20);
+		this.add(textClosure);
 		//---
-		attrs = new JTextField();
-		attrs.setBounds(2, 100, 156, 20);
-		this.add(attrs);
+		closure = new JTextField();
+		closure.setBounds(2, 100, 156, 20);
+		this.add(closure);
 		//--- attribute set evaluation input
 		btnClosure = new JButton("Closure");
 		btnClosure.setBounds(30, 120, 100, 20);
 		btnClosure.addMouseListener(new ClosureListener());
 		this.add(btnClosure);
 		//---
-		btnMinCover = new JButton("Min.cover");
-		btnMinCover.setBounds(30, 165, 100, 20);
-		btnMinCover.addMouseListener(new MinCoverListener());
-		this.add(btnMinCover);
+		textEvaluate = new JLabel("Relation to evaluate:");
+		textEvaluate.setBounds(2, 140, 156, 20);
+		this.add(textEvaluate);
 		//---
-		btnKey = new JButton("Keys");
-		btnKey.setBounds(30, 185, 100, 20);
+		attrs = new JTextField("");
+		attrs.setBounds(2, 160, 118, 20);
+		attrs.setEnabled(false);
+		this.add(attrs);
+		//---
+		extra = new JTextField("");
+		extra.setBounds(120, 160, 38, 20);
+		this.add(extra);
+		//---
+		btnKey = new JButton("Evaluate");
+		btnKey.setBounds(30, 180, 100, 20);
 		btnKey.addMouseListener(new KeyListener());
 		this.add(btnKey);
+		//---
+		btnMinCover = new JButton("Min.cover");
+		btnMinCover.setBounds(30, 210, 100, 20);
+		btnMinCover.addMouseListener(new MinCoverListener());
+		this.add(btnMinCover);
 	}
 	
 	public class AddListener implements MouseListener {
@@ -91,17 +104,24 @@ public class InputPanel extends JPanel {
 			String st = slave.getText().toUpperCase();
 			if (!mt.isEmpty() && !st.isEmpty() && (arg0.getButton() == MouseEvent.BUTTON1)) {
 				Window.f.addFuncDep(mt, st);
-				Window.statusPanel.status.setText(mt + "->"	+ st + "added to the set.");
+				Window.statusPanel.status.setText(mt + "->"	+ st + " added to the set.");
 			}
 			Window.fdPanel.textArea.setText("");
 			for (FuncDep fd : Window.f.getSet()) {
 				Window.fdPanel.textArea.append(fd.stringify() + "\n");
 			}
+			attrs.setText(Helper.getAttributes(Window.f.getSet()));
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent arg0) {
-			Window.statusPanel.status.setText("Adds a dependency to the set. "
+			String mt = master.getText().toUpperCase();
+			String st = slave.getText().toUpperCase();
+			if (!mt.isEmpty() && !st.isEmpty())
+				Window.statusPanel.status.setText("Adds " + mt + "->" + st + " to the set. "
+						+ "Duplicate dependencies will not be added.");
+			else
+				Window.statusPanel.status.setText("Adds a dependency to the set. "
 					+ "Duplicate dependencies will not be added.");
 		}
 
@@ -131,7 +151,8 @@ public class InputPanel extends JPanel {
 			String st = slave.getText().toUpperCase();
 			if (!mt.isEmpty() && !st.isEmpty() && (arg0.getButton() == MouseEvent.BUTTON1)) {
 				Window.f.removeFuncDep(mt, st);
-				Window.statusPanel.status.setText("Removed" + mt + "->"	+ st + "from the set.");
+				Window.statusPanel.status.setText("Removed " + mt + "->" + st + " from the set.");
+				attrs.setText(Helper.getAttributes(Window.f.getSet()));
 			}
 			Window.fdPanel.textArea.setText("");
 			for (FuncDep fd : Window.f.getSet()) {
@@ -144,7 +165,7 @@ public class InputPanel extends JPanel {
 			String mt = master.getText().toUpperCase();
 			String st = slave.getText().toUpperCase();
 			if (!mt.isEmpty() && !st.isEmpty())
-				Window.statusPanel.status.setText("Removes" + mt + "->"	+ st + "from the set.");
+				Window.statusPanel.status.setText("Removes " + mt + "->" + st + " from the set.");
 			else
 				Window.statusPanel.status.setText("Removes a dependency with specific attributes from the set.");
 		}
@@ -171,7 +192,7 @@ public class InputPanel extends JPanel {
 	public class ClosureListener implements MouseListener {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			String at = attrs.getText().toUpperCase();
+			String at = closure.getText().toUpperCase();
 			String closure;
 			if (!at.isEmpty() && (arg0.getButton() == MouseEvent.BUTTON1)) {
 				Window.fdPanel.textArea.setText("");
@@ -186,9 +207,10 @@ public class InputPanel extends JPanel {
 
 		@Override
 		public void mouseEntered(MouseEvent arg0) {
-			String at = master.getText().toUpperCase();
+			String at = attrs.getText().toUpperCase();
+			String et = extra.getText().toUpperCase();
 			if (!at.isEmpty())
-				Window.statusPanel.status.setText("Computes attribute closure of {" + at + "} on the set.");
+				Window.statusPanel.status.setText("Computes attribute closure of {" + (at + et) + "} on the set.");
 			else
 				Window.statusPanel.status.setText("Computes attribute closure of given attributes on the set.");
 		}
@@ -225,6 +247,7 @@ public class InputPanel extends JPanel {
 				mincover = Helper.minCover(Window.f.getSet());
 				for (FuncDep fd : mincover)
 					Window.fdPanel.textArea.append(fd.stringify() + "\n");
+				attrs.setText(Helper.getAttributes(Window.f.getSet()));
 			}			
 		}
 
@@ -255,28 +278,34 @@ public class InputPanel extends JPanel {
 	public class KeyListener implements MouseListener {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			String la, ra, ba, na;
-			String at = attrs.getText().toUpperCase();
+			String la, ra, ba;
+			ArrayList<String> keys;
+			String at = (attrs.getText() + extra.getText()).toUpperCase();
+			String et = extra.getText().toUpperCase();
 			if (arg0.getButton() == MouseEvent.BUTTON1) {
 				la = Helper.createSide(Window.f.getSet(), at, State.LEFT);
 				ra = Helper.createSide(Window.f.getSet(), at, State.RIGHT);
-				na = Helper.createSide(Window.f.getSet(), at, State.NONE);
 				Window.keyPanel.left.setText(la);
 				Window.keyPanel.right.setText(ra);
-				Window.keyPanel.none.setText(na);
+				Window.keyPanel.none.setText(et);
 				ba = at;
 				ba = Helper.removeString(ba, la);
 				ba = Helper.removeString(ba, ra);
-				ba = Helper.removeString(ba, na);
+				ba = Helper.removeString(ba, et);
 				Window.keyPanel.both.setText(ba);
-			}	
+				Window.keyPanel.textArea.setText("");
+				keys = Helper.findKeys(Window.f.getSet(), la, ba, et);
+				for (String key : keys)
+					Window.keyPanel.textArea.append(key + "\n");
+			}
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent arg0) {
-			String at = master.getText().toUpperCase();
+			String at = attrs.getText().toUpperCase();
+			String et = extra.getText().toUpperCase();
 			if (!at.isEmpty())
-				Window.statusPanel.status.setText("Evaluates primary and secondary attributes of {" + at + "} on the set.");
+				Window.statusPanel.status.setText("Evaluates primary and secondary attributes of {" + (at+et) + "} on the set.");
 			else
 				Window.statusPanel.status.setText("Evaluates primary and secondary attributes of given attributes on the set.");
 		}
