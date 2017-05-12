@@ -3,13 +3,13 @@
 Current version: 0.61</p>
 
 <h2>Overview</h2>
-<p>dbCalc features a basic user interface, where functional dependencies can be added to a panel (representing FD sets). The utility can handle FD operations and evaluate attributes, as well as calculating a highest normal form. The results appear in the respective text area or on the right hand side table.</p>
-
-<h2>Background</h2>
-<p>Functional dependencies (FD) are connections between a table's columns, where a certain column determines and therefore implies the other's values. While handy and most of the time essential, too many FD's can lead to repeating data values. Eliminating and simplifying FD's, so that they adhere to a series of conditions, (called normal forms) can reduce such redundancy.
-
-dbCalc is intended to perform basic operations in schema planning, which the user may require.
-
+<p>dbCalc is a lightweight utility that works with functional dependencies (FD's). FD's are logical relationships, where a set of columns' values determine another set's values, due to their logical implications. Such dependencies are necessary to regulate value input in the table, however overusing them can lead to multiple inclusion of the same value, unnecessarily enlarging data quantity and table size. There are a multitude of principles that can be used to measure redundancy and to reduce the overall number of occurring dependencies:</p>
+<ul>
+<li><u>Normal forms:</u> The generic measure for FD-based redundancy. Respective normal forms require a table to follow a number of requirements, therefore including a relative quantity of redundancy (compared to one normal form or another). FD-based redundancies can range from 0NF to BCNF (see glossary). dbCalc works with at least 1NF compositions.</li>
+<li><u>Key attributes:</u> Some columns are more significant than others due to their role in determining other columns. These key attributes are mostly the source of compulsory dependencies and therefore determine the overall "sluggishness" of the database. Due to this fact however, their presence can effectively reduce redundancy.</li>
+<li><u>Closures:</u> Closures are basically an implication of all attributes or FD's, concluding whether an attribute set or FD set has a significant "key" role. Finding these components helps us to find keys and redundancy-free resolutions easier.</li>
+<li><u>Resolutions:</u> Most of the time, splitting up the initial table is the best choice to eliminate redundancies. While this can be committed at the expense of more data, having more transparent tables can make future queries run faster and easier. In order to not lose information, the requirements of being "lossless" and "dependency-preserving" are declared in practice.</li>
+</ul>
 <h2>Functionality</h2>
 The current version supports:
 <ul>
@@ -20,10 +20,8 @@ The current version supports:
 <li>Finding keys in an FD set.
 <li>Calculating a highest normal form on a relation and FD set (up to BCNF).
 </ul>
-
 <h2>Motivation and Terms of Use</h2>
 <p>dbCalc is intended to be a fun but basic free-to-use software, as well as free to anyone to try optimizing (and so I encourage you!) the source-code for the greater good. I want to make this software handy for getting know to and trying this utility in a "fun" field of Database Theory.</p>
-
 <h2>Glossary</h2>
 <ul>
 <li><u>Relation</u>: A sheet/table of data represented with the column names.
