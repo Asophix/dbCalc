@@ -11,7 +11,7 @@ import dbCalc.Model.Database;
 public class Window extends JFrame {
 
 	private static final long serialVersionUID = 1485565230491815565L;
-	final double versionNumber = 0.6;
+	final double versionNumber = 0.61;
 	final String title = "dbCalc - Functional Dependency Calculator v" + versionNumber;
 	public static InputPanel iPanel; //generic input container
 	public static FDPanel fdPanel; //FD-container

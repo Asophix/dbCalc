@@ -1,5 +1,16 @@
 DBCalc - Functional Dependency Calculator
 -----------------
+v0.61 Update (Normal Form evaluation) - 2017.05.12.
+Added Normal Form functionality! The highest NF appears just below
+the keys list.
+= Model:
+  - Helper:
+    * Added getNormalForm() to get a highest NF for a given relation and set.
+    * Fixed findKeys() not removing repeating attributes.
+= View:
+  - New NF counter under the keys list.
+  - Fixed attribute evaluation taking repeating attributes into account.
+-----------------
 v0.6 Update (Key Search) - 2017.05.11.
 Added Key Search functionality! The keys are listed on the right-hand side,
 below the evaluation table. Evaluate commences both key search and attribute

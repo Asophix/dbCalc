@@ -15,8 +15,8 @@ public class KeyPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 3653157922140956328L;
-	JLabel textAttrs, textLeft, textRight, textBoth, textNone;
-	JTextField left, right, both, none;
+	JLabel textAttrs, textLeft, textRight, textBoth, textNone, textNF;
+	JTextField left, right, both, none, nf;
 	JLabel textKeys;
 	JTextArea textArea;
 	JScrollPane scrollArea;
@@ -70,12 +70,21 @@ public class KeyPanel extends JPanel {
 		this.add(textKeys);
 		//---
 		textArea = new JTextArea("");
-		textArea.setBounds(2, 122, 236, 116);
+		textArea.setBounds(2, 122, 236, 96);
 		this.add(textArea);
 		//---
 		scrollArea = new JScrollPane(textArea);
-		scrollArea.setBounds(2, 122, 236, 116);
+		scrollArea.setBounds(2, 122, 236, 96);
 		this.add(scrollArea);
+		//---
+		textNF = new JLabel("Highest normal form:");
+		textNF.setBounds(2, 218, 178, 20);
+		this.add(textNF);
+		//---
+		nf = new JTextField();
+		nf.setBounds(180, 218, 58, 20);
+		nf.setEnabled(false);
+		this.add(nf);
 	}
 
 }

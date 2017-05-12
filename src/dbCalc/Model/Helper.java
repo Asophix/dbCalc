@@ -351,13 +351,13 @@ public class Helper {
 			for (String subset : subsets) {
 				subset = simplify(left + subset);
 				if (closure(set, subset).equals(existing)) {
-					subset = subset + none;			
+					subset = simplify(subset + none);			
 					result.add(subset);
 				}	
 			}
 		}
 		else {
-			result.add(left + none);
+			result.add(simplify(left + none));
 		}
 		HashSet<Integer> deleteable = new HashSet<>(0);
 		for (int i = 0; i < result.size(); i++) {
@@ -375,6 +375,55 @@ public class Helper {
 			result.remove(index);
 		Collections.sort(result);
 		return result;
+	}
+	
+	//evaluates highest normal form on given FD set
+	public static int getNormalForm(ArrayList<FuncDep> set, ArrayList<String> keys) {
+		//BCNF evaluation
+		//we need to see if leftside is a superkey
+		boolean denied = false;
+		for (FuncDep fd : set) {
+			boolean pass = false;
+			for (String key : keys) {
+				if (contains(fd.getMasterName(), key))
+					pass = true;
+			}
+			if (!pass)
+				denied = true;
+		}
+		if (!denied)
+			return 4;
+		//3NF evaluation
+		//we need to see if leftside is a key or rightside is primary
+		denied = false;
+		for (FuncDep fd : set) {
+			boolean pass = false;
+			for (String key : keys) {
+				if (fd.getMasterName().equals(key) || contains(key, fd.getSlaveName() + ""))
+					pass = true;
+			}
+			if (!pass)
+				denied = true;
+		}
+		if (!denied)
+			return 3;
+		//2NF evaluation
+		//we need to see if secondary attribute does not depend from power set of a key
+		//if it fails, the FD is in 1NF (strictly implied from storage principles)
+		String primary = "";
+		String secondary = getAttributes(set);
+		for (String key : keys) {
+			primary = primary + key;
+		}
+		primary = simplify(primary);
+		secondary = removeString(secondary, primary);
+		for (FuncDep fd : set) {
+			for (String key : keys) {
+				if (contains(key, fd.getMasterName()) && contains(secondary.toString(), fd.getSlaveName() + ""))
+					return 1;
+			}
+		}
+		return 2;
 	}
 
 }

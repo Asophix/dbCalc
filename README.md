@@ -1,9 +1,9 @@
 <img src="logo.png" alt="dbCalc">
 <p><b>dbCalc</b> is a simple application written in Java. It is a functional dependency calculator created as to practise Database Theory: Schema Decomposition. This project is currently undergoing development.<br>
-Current version: 0.6</p>
+Current version: 0.61</p>
 
 <h2>Overview</h2>
-<p>dbCalc features a basic user interface, where functional dependencies can be added to a panel (representing FD sets). The utility can handle FD operations and evaluate attributes. The results appear in the respective text area or on the right hand side table.</p>
+<p>dbCalc features a basic user interface, where functional dependencies can be added to a panel (representing FD sets). The utility can handle FD operations and evaluate attributes, as well as calculating a highest normal form. The results appear in the respective text area or on the right hand side table.</p>
 
 <h2>Background</h2>
 <p>Functional dependencies (FD) are connections between a table's columns, where a certain column determines and therefore implies the other's values. While handy and most of the time essential, too many FD's can lead to repeating data values. Eliminating and simplifying FD's, so that they adhere to a series of conditions, (called normal forms) can reduce such redundancy.
@@ -18,6 +18,7 @@ The current version supports:
 <li>Calculation for an attribute set's closure.
 <li>Evaluation for a given schema on a FD set's attributes.
 <li>Finding keys in an FD set.
+<li>Calculating a highest normal form on a relation and FD set (up to BCNF).
 </ul>
 
 <h2>Motivation and Terms of Use</h2>
@@ -27,7 +28,7 @@ The current version supports:
 <ul>
 <li><u>Relation</u>: A sheet/table of data represented with the column names.
 <li><u>Attribute</u>: A member of a relation - a single column's name.
-<li><u>Functional Dependency</u>: A connection between attribute sets, where the leftside set determines the rightside set's values. Formally: if A and B are members of the same relation ("r"), and said relation has two rows ("t" and "t'"), where the respective values of A and B are equal (t[A] = t'[A] and t[B] = t'[B]), then A determines B.
+<li><u>Functional Dependency</u>: A connection between attribute sets, where the left side set determines the right side set's values. Formally: if A and B are members of the same relation ("r"), and said relation has two rows ("t" and "t'"), where the respective values of A and B are equal (t[A] = t'[A] and t[B] = t'[B]), then A determines B.
 <li><u>Key</u>: An attribute set that implies all attributes in the relation and cannot be reduced further (formally, no power set of the key implies all attributes).
 <li><u>Superkey</u>: An attribute set that implies all attributes. In other words: an attribute set that contains a key.
 <li><u>Primary attribute</u>: A member attribute of a key.
@@ -44,9 +45,9 @@ The current version supports:
   </ul>
 <li><u>Minimal cover</u>: A FD set's reduced form, in which all FD conforms the following: 
   <ul>
-    <li>the rightside contains only one single attribute
-    <li>the leftside can not be reduced further (the leftside's subsets do not imply each other through the existing FD's)
-    <li>the FD itself cannot be omitted (the rightside is not implied by other FD's)
+    <li>the right side contains only one single attribute
+    <li>the left side can not be reduced further (the leftside's subsets do not imply each other through the existing FD's)
+    <li>the FD itself cannot be omitted (the right side is not implied by other FD's)
    </ul>
 <li><u>Normal form</u>: a means of measuring redundancy.
   <ul>
@@ -60,8 +61,8 @@ The current version supports:
 
 <h2>To be added...</h2>
 <ul>
-<li>Proper .pdf documentation for the utility.
-<li>Normal form evaluation.
+<li>Proper .pdf/Javadoc documentation for the utility.
+<li>Lossless and dependency preserving resolutions.
 <li>And many more... 
 </ul>
 

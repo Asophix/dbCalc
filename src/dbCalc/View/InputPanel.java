@@ -280,8 +280,8 @@ public class InputPanel extends JPanel {
 		public void mouseClicked(MouseEvent arg0) {
 			String la, ra, ba;
 			ArrayList<String> keys;
-			String at = (attrs.getText() + extra.getText()).toUpperCase();
-			String et = extra.getText().toUpperCase();
+			String at = Helper.simplify(attrs.getText().toUpperCase() + extra.getText().toUpperCase());
+			String et = Helper.removeString(extra.getText().toUpperCase(), attrs.getText().toUpperCase());
 			if (arg0.getButton() == MouseEvent.BUTTON1) {
 				la = Helper.createSide(Window.f.getSet(), at, State.LEFT);
 				ra = Helper.createSide(Window.f.getSet(), at, State.RIGHT);
@@ -295,8 +295,20 @@ public class InputPanel extends JPanel {
 				Window.keyPanel.both.setText(ba);
 				Window.keyPanel.textArea.setText("");
 				keys = Helper.findKeys(Window.f.getSet(), la, ba, et);
-				for (String key : keys)
-					Window.keyPanel.textArea.append(key + "\n");
+				for (int i = 0; i < keys.size(); i++) {
+					Window.keyPanel.textArea.append(keys.get(i));
+					if (i < keys.size() - 1)
+						Window.keyPanel.textArea.append(", ");
+				}
+				int nf = Helper.getNormalForm(Window.f.getSet(), keys);
+				switch (nf) {
+					case 4: 
+						Window.keyPanel.nf.setText("BCNF");
+						break;
+					default:
+						Window.keyPanel.nf.setText(nf +"NF");
+						break;
+				}
 			}
 		}
 
@@ -305,9 +317,9 @@ public class InputPanel extends JPanel {
 			String at = attrs.getText().toUpperCase();
 			String et = extra.getText().toUpperCase();
 			if (!at.isEmpty())
-				Window.statusPanel.status.setText("Evaluates primary and secondary attributes of {" + (at+et) + "} on the set.");
+				Window.statusPanel.status.setText("Evaluates attributes, keys and highest normal form on {" + (Helper.simplify(at+et)) + "} and the set.");
 			else
-				Window.statusPanel.status.setText("Evaluates primary and secondary attributes of given attributes on the set.");
+				Window.statusPanel.status.setText("Evaluates attributes, keys and highest normal form on a given relation and the set.");
 		}
 
 		@Override
