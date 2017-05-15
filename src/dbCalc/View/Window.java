@@ -2,6 +2,7 @@ package dbCalc.View;
 
 import java.awt.Dimension;
 import java.io.IOException;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
@@ -62,7 +63,7 @@ public class Window extends JFrame {
 		bigPanel.add(keyPanel);
 		//---
 		logoPanel = new LogoPanel();
-		logoPanel.setBounds(490, 376, 150, 104);
+		logoPanel.setBounds(495, 390, 142, 63);
 		bigPanel.add(logoPanel);
 		//---
 		this.setVisible(true);

@@ -1,5 +1,18 @@
 DBCalc - Functional Dependency Calculator
 -----------------
+v0.62 Update - 2017.05.15.
+Added lossless 3NF resolution, to the "evaluate" function.
+= Model:
+  - Helper:
+    * Added split3NF() to create a lossless, dependency-preserving 3NF resolution
+      from a given set.
+  - FuncDep:
+    * Added getAttributes() that returns all attributes of a FD.
+= View:
+  - New lossless 3NF resolution area in the evaluation panel.
+  - Textboxes are now uneditable.
+  - Textboxes now wrap their entries.
+-----------------
 v0.61 Update (Normal Form evaluation) - 2017.05.12.
 Added Normal Form functionality! The highest NF appears just below
 the keys list.

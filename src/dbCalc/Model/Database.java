@@ -10,16 +10,6 @@ import java.util.Collections;
  */
 
 public class Database {
-
-	//TODO Relation
-	//Object négytagú deklarációval. Bal, mindegyik, jobb, egyik sem.
-	//Amikor a függés frissül, akkor a relation is fog DataBase-ben. 
-	//ArrayList<Attribute> ki lesz vezérelve Relation fieldjeibe.
-	//Alapesetben mindenki mindkettőbe kerül.
-	//Inkrementális implementáció:
-	//f1: ui-n táblázat - BMEJ => done
-	//f2: Helper - kulcs keresése
-	//f3: Helper - normálformák!!!
 	
 	private ArrayList<FuncDep> set;
 	

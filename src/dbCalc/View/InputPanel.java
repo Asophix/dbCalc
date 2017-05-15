@@ -97,6 +97,17 @@ public class InputPanel extends JPanel {
 		this.add(btnMinCover);
 	}
 	
+	public void writeSet(ArrayList<FuncDep> f, boolean reset) {
+		if (reset)
+			Window.fdPanel.textArea.setText("");
+		for (int i = 0; i < f.size(); i++) {
+			Window.fdPanel.textArea.append(f.get(i).stringify());
+			if (i < f.size() - 1)
+				Window.fdPanel.textArea.append(", ");
+		}
+		Window.fdPanel.textArea.append("\n");
+	}
+	
 	public class AddListener implements MouseListener {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
@@ -106,10 +117,7 @@ public class InputPanel extends JPanel {
 				Window.f.addFuncDep(mt, st);
 				Window.statusPanel.status.setText(mt + "->"	+ st + " added to the set.");
 			}
-			Window.fdPanel.textArea.setText("");
-			for (FuncDep fd : Window.f.getSet()) {
-				Window.fdPanel.textArea.append(fd.stringify() + "\n");
-			}
+			writeSet(Window.f.getSet(), true);
 			attrs.setText(Helper.getAttributes(Window.f.getSet()));
 		}
 
@@ -154,10 +162,7 @@ public class InputPanel extends JPanel {
 				Window.statusPanel.status.setText("Removed " + mt + "->" + st + " from the set.");
 				attrs.setText(Helper.getAttributes(Window.f.getSet()));
 			}
-			Window.fdPanel.textArea.setText("");
-			for (FuncDep fd : Window.f.getSet()) {
-				Window.fdPanel.textArea.append(fd.stringify() + "\n");
-			}
+			writeSet(Window.f.getSet(), true);
 		}
 
 		@Override
@@ -195,10 +200,7 @@ public class InputPanel extends JPanel {
 			String at = closure.getText().toUpperCase();
 			String closure;
 			if (!at.isEmpty() && (arg0.getButton() == MouseEvent.BUTTON1)) {
-				Window.fdPanel.textArea.setText("");
-				for (FuncDep fd : Window.f.getSet()) {
-					Window.fdPanel.textArea.append(fd.stringify() + "\n");
-				}
+				writeSet(Window.f.getSet(), true);
 				Window.fdPanel.textArea.append("Closure:\n------\n");
 				closure = Helper.closure(Window.f.getSet(), at);
 				Window.fdPanel.textArea.append(closure);
@@ -239,14 +241,10 @@ public class InputPanel extends JPanel {
 		public void mouseClicked(MouseEvent arg0) {
 			ArrayList<FuncDep> mincover;
 			if (arg0.getButton() == MouseEvent.BUTTON1) {
-				Window.fdPanel.textArea.setText("");
-				for (FuncDep fd : Window.f.getSet()) {
-					Window.fdPanel.textArea.append(fd.stringify() + "\n");
-				}
+				writeSet(Window.f.getSet(), true);
 				Window.fdPanel.textArea.append("Minimal cover:\n------\n");
 				mincover = Helper.minCover(Window.f.getSet());
-				for (FuncDep fd : mincover)
-					Window.fdPanel.textArea.append(fd.stringify() + "\n");
+				writeSet(mincover, false);
 				attrs.setText(Helper.getAttributes(Window.f.getSet()));
 			}			
 		}
@@ -303,11 +301,18 @@ public class InputPanel extends JPanel {
 				int nf = Helper.getNormalForm(Window.f.getSet(), keys);
 				switch (nf) {
 					case 4: 
-						Window.keyPanel.nf.setText("BCNF");
+						Window.keyPanel.textNFValue.setText("BCNF");
 						break;
 					default:
-						Window.keyPanel.nf.setText(nf +"NF");
+						Window.keyPanel.textNFValue.setText(nf +"NF");
 						break;
+				}
+				ArrayList<String> reso = Helper.split3NF(Window.f.getSet(), la, ba, et);
+				Window.keyPanel.resoArea.setText("");
+				for (int i = 0; i < reso.size(); i++) {
+					Window.keyPanel.resoArea.append(reso.get(i));
+					if (i < reso.size() - 1)
+						Window.keyPanel.resoArea.append(", ");
 				}
 			}
 		}

@@ -57,21 +57,16 @@ public class Helper {
 								chunk.deleteCharAt(y);
 						}
 					}
-					System.out.print("powerset:" + powerset);
-					System.out.print(", powersetclosure: " + powersetclosure);
-					System.out.print(", chunk: " + chunk + "\n");
 					//for powersetclosure:
 					//if it contains chunk, then chunk is removeable.
 					for (int x = 0; x < chunk.length(); x++) {
 						char ch = chunk.charAt(x);
 							int y = powersetclosure.toString().indexOf(ch);
-							System.out.println(y);
 							if (y > -1)
 								removeable.append(ch);
 					}
 					//after we got this, we simplify and remove all masterelements
 					String removeables = simplify(removeable.toString());
-					System.out.println("removeables:" + removeables);
 					for (int x = 0; x < removeables.length(); x++) {
 						fd.removeMasterElement(removeables.charAt(x));
 					}
@@ -424,6 +419,23 @@ public class Helper {
 			}
 		}
 		return 2;
+	}
+	
+	public static ArrayList<String> split3NF(ArrayList<FuncDep> set, String left, String both, String none) {
+		ArrayList<String> members = new ArrayList<>(0);
+		for (FuncDep fd : set)
+			members.add(fd.getAttributes());
+		ArrayList<String> keys = findKeys(set, left, both, none);
+		boolean lossless = false;
+		for (String member : members)
+			for (String key : keys)
+				if (contains(member, key)) {
+					lossless = true;
+					break;
+				}
+		if (!lossless)
+			members.add(keys.get(0));
+		return members;
 	}
 
 }

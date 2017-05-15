@@ -1,6 +1,6 @@
 <img src="logo.png" alt="dbCalc">
 <p><b>dbCalc</b> is a simple application written in Java. It is a functional dependency calculator created as to practise Database Theory: Schema Decomposition. This project is currently undergoing development.<br>
-Current version: 0.61</p>
+Current version: 0.62</p>
 
 <h2>Overview</h2>
 <p>dbCalc is a lightweight utility that works with functional dependencies (FD's). FD's are logical relationships, where a set of columns' values determine another set's values, due to their logical implications. Such dependencies are necessary to regulate value input in the table, however overusing them can lead to multiple inclusion of the same value, unnecessarily enlarging data quantity and table size. There are a multitude of principles that can be used to measure redundancy and to reduce the overall number of occurring dependencies:</p>

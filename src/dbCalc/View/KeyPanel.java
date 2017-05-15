@@ -15,17 +15,17 @@ public class KeyPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 3653157922140956328L;
-	JLabel textAttrs, textLeft, textRight, textBoth, textNone, textNF;
-	JTextField left, right, both, none, nf;
-	JLabel textKeys;
-	JTextArea textArea;
-	JScrollPane scrollArea;
+	JLabel textAttrs, textLeft, textRight, textBoth, textNone;
+	JTextField left, right, both, none;
+	JLabel textKeys, textNF, textNFValue, textReso;
+	JTextArea textArea, resoArea;
+	JScrollPane scrollArea, scrollReso;
 	
 	public KeyPanel() {
 		this.setLayout(null);
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		//--- Title component
-		textAttrs = new JLabel("<html><u>Attribute evaluation</u></html>");
+		textAttrs = new JLabel("<html><u>Evaluation results</u></html>");
 		textAttrs.setBounds(64, 2, 176, 20);
 		this.add(textAttrs);
 		//--- Left/Right components
@@ -70,21 +70,38 @@ public class KeyPanel extends JPanel {
 		this.add(textKeys);
 		//---
 		textArea = new JTextArea("");
-		textArea.setBounds(2, 122, 236, 96);
+		textArea.setBounds(2, 122, 236, 40);
+		textArea.setEditable(false);
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
 		this.add(textArea);
 		//---
 		scrollArea = new JScrollPane(textArea);
-		scrollArea.setBounds(2, 122, 236, 96);
+		scrollArea.setBounds(2, 122, 236, 40);
 		this.add(scrollArea);
 		//---
 		textNF = new JLabel("Highest normal form:");
-		textNF.setBounds(2, 218, 178, 20);
+		textNF.setBounds(2, 162, 178, 20);
 		this.add(textNF);
 		//---
-		nf = new JTextField();
-		nf.setBounds(180, 218, 58, 20);
-		nf.setEnabled(false);
-		this.add(nf);
+		textNFValue = new JLabel("n/a");
+		textNFValue.setBounds(200, 162, 58, 20);
+		this.add(textNFValue);
+		//---
+		textReso = new JLabel("<html><u>Lossless 3NF resolution:</u></html>");
+		textReso.setBounds(2, 182, 178, 20);
+		this.add(textReso);
+		//---
+		resoArea = new JTextArea();
+		resoArea.setBounds(2, 200, 236, 40);
+		resoArea.setEditable(false);
+		resoArea.setLineWrap(true);
+		resoArea.setWrapStyleWord(true);
+		this.add(resoArea);
+		//---
+		scrollReso = new JScrollPane(resoArea);
+		scrollReso.setBounds(2, 200, 236, 40);
+		this.add(scrollReso);
 	}
 
 }

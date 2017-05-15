@@ -93,6 +93,10 @@ public class FuncDep {
 		return slave;
 	}
 	
+	public String getAttributes() {
+		return Helper.simplify(this.getMasterName() + this.getSlaveName());
+	}
+	
 	//secondary function for providing better output
 	public String stringify() {
 		String s;

@@ -30,6 +30,9 @@ public class FDPanel extends JPanel {
 		//---
 		textArea = new JTextArea();
 		textArea.setBounds(2, 22, 236, 198);
+		textArea.setEditable(false);
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
 		this.add(textArea);
 		//---
 		scrollArea = new JScrollPane(textArea);
