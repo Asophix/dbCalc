@@ -1,5 +1,8 @@
 DBCalc - Functional Dependency Calculator
 -----------------
+v1.0 Rollout - 2017.07.16.
+Initial release.
+-----------------
 v0.62 Update - 2017.05.15.
 Added lossless 3NF resolution, to the "evaluate" function.
 = Model:

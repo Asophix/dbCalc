@@ -12,14 +12,13 @@ import dbCalc.Model.Database;
 public class Window extends JFrame {
 
 	private static final long serialVersionUID = 1485565230491815565L;
-	final double versionNumber = 0.62;
+	final double versionNumber = 1.0;
 	final String title = "dbCalc - Functional Dependency Calculator v" + versionNumber;
 	public static InputPanel iPanel; //generic input container
 	public static FDPanel fdPanel; //FD-container
 	public static KeyPanel keyPanel; //LRBN and Key evaluator panel
 	public static LogoPanel logoPanel; //welcome text/image pane
 	public static StatusPanel statusPanel; //status bar
-	MenuBar menuBar; //menu bar
 	
 	JPanel bigPanel;
 	
@@ -41,11 +40,7 @@ public class Window extends JFrame {
 		this.add(bigPanel);
 		bigPanel.setLayout(null);
 		bigPanel.setBounds(0, 0, 640, 480);
-		//--- instantiate menu bar
-		menuBar = new MenuBar();
-		menuBar.setBounds(0, 0, 640, 20);
-		bigPanel.add(menuBar);
-		//--- instantiate subpanels
+		//--- instantiate sub-panels
 		statusPanel = new StatusPanel();
 		statusPanel.setBounds(0, 20, 640, 20);
 		bigPanel.add(statusPanel);
